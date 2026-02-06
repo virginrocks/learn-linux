@@ -1,5 +1,7 @@
-# RHCSA Learning Journey
-## Week 1: Linux Sysadmin Mastery
-- Day 1: Storage (fstab, LVM, ACLs, Quotas ✅
+# RHCSA Learning Linux Mastery
+## Week 1 Progress
+- Day 1: Storage (fstab/LVM/ACL/Quota) ✅ [day1-storage/]
+- Day 2: Users/sudo/SSH ⏳ [day2-users/]
 
-- Day 2: Users, sudo, SSH hardening ⏳
+## Portfolio
+RHEL USB labs for RHCSA EX200 prep.
