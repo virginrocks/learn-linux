@@ -1,0 +1,5 @@
+  LV     VG              Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  home   rhel_host-00500 -wi-ao---- 29,99g                                                    
+  root   rhel_host-00500 -wi-ao---- 30,00g                                                    
+  swap   rhel_host-00500 -wi-ao----  4,91g                                                    
+  lvdata vgday1          -wi-ao----  4,50g                                                    

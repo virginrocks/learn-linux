@@ -1,0 +1,14 @@
+User quota on /mnt/lvdata (/dev/mapper/vgday1-lvdata)
+                        Blocks              
+User ID      Used   Soft   Hard Warn/Grace   
+---------- --------------------------------- 
+root            0      0      0  00 [------]
+alice        110M   100M   110M  00 [5 days]
+
+Group quota on /mnt/lvdata (/dev/mapper/vgday1-lvdata)
+                        Blocks              
+Group ID     Used   Soft   Hard Warn/Grace   
+---------- --------------------------------- 
+root            0      0      0  00 [------]
+alice        110M      0      0  00 [------]
+

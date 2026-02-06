@@ -1,0 +1,16 @@
+# file: mnt/lvdata
+# owner: root
+# group: root
+user::rwx
+user:alice:rwx
+group::r-x
+group:devs:r-x
+mask::rwx
+other::r-x
+default:user::rwx
+default:user:alice:rwx
+default:group::r-x
+default:group:devs:r-x
+default:mask::rwx
+default:other::r-x
+
