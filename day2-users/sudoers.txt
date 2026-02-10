@@ -1,0 +1,3 @@
+%devs ALL=(ALL) NOPASSWD: /usr/bin/systemctl *
+%devs ALL=(ALL) NOPASSWD: /bin/mount /mnt/lvdata, /bin/umount /mnt/lvdata
+

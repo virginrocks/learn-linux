@@ -5,4 +5,40 @@ sudo visudo
 # Day 2: devs group privileges
 %devs ALL=(ALL) NOPASSWD: /usr/bin/systemctl *
 %devs ALL=(ALL) NOPASSWD: /bin/mount /mnt/lvdata, /bin/umount /mnt/lvdata
+su bob
+sudo systemctl status sshd
+sudo mount | grep /mnt/lvdata
+-> no passwd requested
+
+sudo grep -A3 "%devs" /etc/sudoers > sudoers-devs.txt
+
+| Rule                           | Effect                                |
+| ------------------------------ | ------------------------------------- |
+| %devs ALL=(ALL)                | devs group, any host, become any user |
+| NOPASSWD: /usr/bin/systemctl * | Passwordless systemctl                |
+| /bin/mount /mnt/lvdata         | Day 1 storage access                  |
+
+su - bob -c "sudo systemctl status sshd"
+
+On archlinux:
+ssh-keygen -t ed25519 -C "your-arch@host" -f ~/.ssh/rhel_usb_key
+# Enter passphrase or blank → creates: rhel_usb_key + rhel_usb_key.pub
+
+ssh-copy-id -i ~/.ssh/rhel_usb_key.pub bob@192.168.1.68
+sudo vim /etc/ssh/sshd_config
+    PasswordAuthentication no
+    PubkeyAuthentication yes
+    PermitRootLogin no
+    MaxAuthTries 3
+    ClientAliveInterval 300
+
+sudo systemctl restart sshd
+
+sudo firewall-cmd --permanent --add-service=ssh
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-all
+
+ssh -i ~/.ssh-rhel/rhel_usb_key bob@192.168.1.62
+# login without passwd
+
 
