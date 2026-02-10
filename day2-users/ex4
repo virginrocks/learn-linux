@@ -1,0 +1,4 @@
+getent passwd | grep -E 'bon|charlie|alice' > users-group.txt
+getent group devs >> users-group.txt
+getent group wheel >> users-group.txt
+cat users-group.txt

@@ -1,0 +1,5 @@
+alice:x:1101:1101::/home/alice:/bin/bash
+bob:x:1102:1103:Bob Developer:/home/bob:/bin/bash
+charlie:x:1103:1104:Charlie Tester:/home/charlie:/bin/bash
+devs:x:1102:alice,bob,charlie
+wheel:x:10:devi,bob

@@ -1,0 +1,22 @@
+
+FSTAB df
+
+echo "tmpfs /mnt/tmp tmpfs defaults,noatime,mode=1777,size=512m 0 0" | sudo tee -a /etc/fstab
+
+mkdir /mnt/tmp
+systemctl daemon-reload
+mount -a
+df -hT | grep tmpfs
+reboot
+df -hT | grep tmp
+
+Recap
+
+| Option    | Purpose                         |
+| --------- | ------------------------------- |
+| size=512m | Limit RAM usage                 |
+| mode=1777 | drwxrwxrwt (world-write+sticky) |
+| noatime   | No access time updates          |
+| nofail    | Don't halt boot if missing      |
+
+

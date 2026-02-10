@@ -1,0 +1,24 @@
+
+LVEXTEND LVS PVS VGS DF -hT
+
+vgs vgday1
+lvs vgday1
+df -h /mnt/lvdata
+
+lvextend -L +1.5G /dev/vgday1/lvdata
+lvs vgday1
+xfs_growfs /mnt/lvdata
+pvs
+vgs
+lvs
+df -hT /mnt/lvdata
+
+Recap
+
+| Resize Type | Command                 |
+| ----------- | ----------------------- |
+| LV extend   | lvextend -L +1.5G <LV>  |
+| XFS grow    | xfs_growfs <mountpoint> |
+| View free   | vgs                     |
+
+

@@ -1,0 +1,5 @@
+sudo useradd -m -G devs,wheel -d "Bob Developer" bob
+sudo useradd -m -G devs -d "Charlie Tester" charlie
+sudo passwd bob		#BobPass123
+sudo passwd charlie	#CharliePass123
+

@@ -1,0 +1,43 @@
+LVM
+
+lsblk -f
+free -h
+fdisk /dev/sdb
+#n
+#First sector -> entry
+#+5G
+#t
+#44 (Linux LVM)
+#w
+
+pvcreate /dev/sdb5
+pvs
+
+vgcreate usbvg /dev/sdb5
+vgs
+
+lvcreate -L 3G -n lvdata usbvg
+lvs
+
+mkfs.xfs /dev/usbvg/lvdata
+mkdir /mnt/lvdata
+mount /dev/usbvg/lvdata /mnt/lvdata
+df -hT /mnt/lvdata
+
+echo "UUID=$(blkid -s UUID -o value /dev/usbvg/lvdata) /mnt/lvdata xfs defaults 0 2" | tee -a /etc/fstab
+systemctl daemon-reload
+umount /dev/usbvg/lvdata 2>/dev/null || true
+mount -a
+df -hT /mnt/lvdata
+reboot 
+df -hT /dev/usbvg/lvdata
+
+Recap
+
+| Command  | Creates      | View |
+| -------- | ------------ | ---- |
+| pvcreate | Physical Vol | pvs  |
+| vgcreate | Volume Group | vgs  |
+| lvcreate | Logical Vol  | lvs  |
+
+

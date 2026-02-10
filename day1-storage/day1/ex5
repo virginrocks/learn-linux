@@ -1,0 +1,60 @@
+
+QUOTAS  ACL (Access Control List)
+
+useradd -u 1101 alice
+groupadd devs
+usermod -aG devs alice
+id alice
+
+setfacl -m u:alice:rwx /mnt/lvdata
+setfacl -m g:devs:rx /mnt/lvdata
+setfacl -m d:u:alice:rwx /mnt/lvdata
+setfacl -m d:g:devs:rx /mnt/lvdata
+
+su - alice
+touch /mnt/lvdata/alice.txt
+ls -l /mnt/lvdata
+exit
+getfacl /mnt/lvdata
+
+#
+sudo dnf install quota quota-tools
+sudo mkdir /quota
+sudo mount -o remount /mnt/lvdata
+sudo tune2fs -O quota /dev/mapper/vgday1-lvdata  # XFS: xfs_quota instead
+sudo mount -o remount /mnt/lvdata
+#
+
+mkdir /quota
+umount /mnt/lvdata
+mount -t xfs -o rw,uquota,gquota /dev/usbvg/lvdata /mnt/lvdata
+mount | grep lvdata
+
+xfs_quota -x -c 'limit -u bsoft=100m bhard=110m alice' /mnt/lvdata
+xfs_quota -x -c 'report -h' /mnt/lvdata
+
+su - alice
+dd id=/dev/zero of=/dev/lvdata/alice.file bs=1M count=150 
+exit
+
+xfs_quota -x -c 'report -h' /mnt/lvdata
+getfacl /mnt/lvdata
+
+Recap
+
+✅ Quota: alice hit 110M hard limit (6 days grace = working!)
+✅ ACLs: user:alice:rwx, group:devs:r-x, defaults inherited perfectly
+
+ ---------------------------------------
+| useradd -u xxxx | xxxx: user id        |
+|----------------------------------------|
+| usermod -aG u g | add u to g           |
+|----------------------------------------|
+| setfacl         | set ACL's            |
+|----------------------------------------|
+| getfacl         | read existing ACL's  |
+|----------------------------------------|
+| xfs_quota -x -c | send instructions    |
+ ---------------------------------------
+
+

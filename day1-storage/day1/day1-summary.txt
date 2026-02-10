@@ -1,0 +1,49 @@
+| Exercise    | Status | Key Commands               |
+| ----------- | ------ | -------------------------- |
+| 1 Partition | ✅      | fdisk, mkfs.xfs, mount     |
+| 2 fstab     | ✅      | UUID=..., mount -a         |
+| 3 tmpfs     | ✅      | size=512m,mode=1777        |
+| 4 LVM       | ✅      | pvcreate,vgcreate,lvcreate |
+| 5 Resize    | ✅      | lvextend + xfs_growfs      |
+| 6 ACL/Quota | ✅      | setfacl, xfs_quota         |
+
+devtmpfs                          devtmpfs   3,7G       0  3,7G   0% /dev
+tmpfs                             tmpfs      3,7G    3,2M  3,7G   1% /dev/shm
+tmpfs                             tmpfs      1,5G    9,9M  1,5G   1% /run
+tmpfs                             tmpfs      1,0M       0  1,0M   0% /run/credentials/systemd-cryptsetup@luks\x2d08fe82bb\x2db689\x2d4900\x2d99c9\x2dd2f7142b08b6.service
+tmpfs                             tmpfs      1,0M       0  1,0M   0% /run/credentials/systemd-journald.service
+tmpfs                             tmpfs      512M       0  512M   0% /mnt/tmp
+/dev/sdb4                         xfs        2,0G     71M  1,9G   4% /mnt/ex1
+tmpfs                             tmpfs      756M    144K  756M   1% /run/user/1000
+tmpfs                             tmpfs      756M     60K  756M   1% /run/user/0
+/dev/mapper/vgday1-lvdata         xfs        4,5G    230M  4,3G   6% /mnt/lvdata
+# file: mnt/lvdata
+# owner: root
+# group: root
+user::rwx
+user:alice:rwx
+group::r-x
+group:devs:r-x
+mask::rwx
+other::r-x
+default:user::rwx
+default:user:alice:rwx
+default:group::r-x
+default:group:devs:r-x
+default:mask::rwx
+default:other::r-x
+
+User quota on /mnt/lvdata (/dev/mapper/vgday1-lvdata)
+                        Blocks              
+User ID      Used   Soft   Hard Warn/Grace   
+---------- --------------------------------- 
+root            0      0      0  00 [------]
+alice        110M   100M   110M  00 [6 days]
+
+Group quota on /mnt/lvdata (/dev/mapper/vgday1-lvdata)
+                        Blocks              
+Group ID     Used   Soft   Hard Warn/Grace   
+---------- --------------------------------- 
+root            0      0      0  00 [------]
+alice        110M      0      0  00 [------]
+

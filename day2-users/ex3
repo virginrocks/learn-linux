@@ -1,0 +1,4 @@
+getent passwd | grep -E 'bob|charlie|alice'
+getent group devs
+getent group wheel
+id bob

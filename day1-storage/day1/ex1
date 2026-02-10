@@ -1,0 +1,35 @@
+
+FSTAB MKFS MOUNT
+
+sudo -i
+cp /etc/fstab /etc/fstab.backup.day1
+fdisk /dev/sdb
+#n
+#First sector -> enter
+#+2G
+#w
+mkfs.xfs /dev/sdb4
+mkdir /mnt/data
+mount -p /dev/sdb4 /mnt/data
+findmnt --verify
+df -h | grep data
+umount /mnt/data
+blkid -s UUID -o value /dev/sdb4
+echo 'UUID=xxxxxxxxx /mnt/data xfs default,noatime,nofail 0 2' | tee -a /etc/fstab
+systemctl daemon-reload
+mount -a
+df -h | grep data
+
+Recap
+
+| fstab Column | Your Value              | Meaning                   |
+| ------------ | ----------------------- | ------------------------- |
+| 1: Device    | UUID=...                | Stable ID (not /dev/vdb1) |
+| 2: Mount     | /mnt/ex1                | Where                     |
+| 3: Type      | xfs                     | Filesystem                |
+| 4: Options   | defaults,noatime,nofail | Mount flags               |
+| 5: Dump      | 0                       | No backup                 |
+| 6: fsck      | 2                       | Check after root          |
+
+
+
