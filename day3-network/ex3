@@ -1,0 +1,10 @@
+
+Hostname + /etc/hosts
+    sudo hostnamectl set-hostname rhel-sysadmin.lan
+    sudo vim /etc/hosts
+        192.168.2.100   rhel-sysadmin.lan   rhel-sysadmin
+        192.168.1.62    Host-002.lan
+
+    Test
+        ping -c3 rhel-sysadmin.lan
+        hostnamectl status

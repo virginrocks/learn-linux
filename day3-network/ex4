@@ -1,0 +1,8 @@
+
+Firewalld Mastery
+    sudo firewall-cmd --permanent --add-service={ssh,hhtp} --zone=public
+    sudo firewall-cmd --permanent --add-port=8080/tcp --zone=public
+    sudo firewall-cmd --reload
+    sudo firewall-cmd --list-all
+    sudo firewall-cmd --info-service=http
+

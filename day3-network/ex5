@@ -1,0 +1,7 @@
+
+Apache Test Server
+    sudo dnf install httpd -y
+    sudo systemctl enable --now httpd
+    curl localhost
+    echo "<h1>RHCSA Day 3: $(hostname) @ $(date)</h1>" | sudo tee /var/www/html/index.html
+    curl localhost
