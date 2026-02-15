@@ -1,7 +1,7 @@
 devtmpfs                          devtmpfs   3,7G       0  3,7G   0% /dev
 tmpfs                             tmpfs      3,7G    3,7M  3,7G   1% /dev/shm
 tmpfs                             tmpfs      1,5G    9,9M  1,5G   1% /run
-tmpfs                             tmpfs      1,0M       0  1,0M   0% /run/credentials/systemd-cryptsetup@luks\x2d08fe82bb\x2db689\x2d4900\x2d99c9\x2dd2f7142b08b6.service
+tmpfs                             tmpfs      1,0M       0  1,0M   0% /run/credentials/systemd-cryptsetup@luks\xxxxxxxxxxx\x2db689\x2d4900\xxxxxxx\xxxxxxxxxxxxxxx.service
 tmpfs                             tmpfs      1,0M       0  1,0M   0% /run/credentials/systemd-journald.service
 tmpfs                             tmpfs      512M       0  512M   0% /mnt/tmp
 /dev/sdb4                         xfs        2,0G     71M  1,9G   4% /mnt/ex1
