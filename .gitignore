@@ -1,0 +1,23 @@
+# Logs and temp files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Build outputs
+build/
+dist/
+
+# Dependencies (e.g., for Node/Python)
+node_modules/
+vendor/
+__pycache__/
+
+# Secrets
+.env
+*.key
+config.json
+
+# IDE/editor files
+.vim
+
