@@ -6,6 +6,6 @@ Create Network Interface (eth1 static)
     Activate
         sudo nmcli con up static-lan
         nmcli con show static-lan
-        ip addr show enp1s0
+        ip addr show enp0s25
 
 
