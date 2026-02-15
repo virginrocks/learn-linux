@@ -1,0 +1,13 @@
+NEXT                            LEFT LAST                              PASSED UNIT                         ACTIVATES
+Sun 2026-02-15 11:19:28 CET    24min Sun 2026-02-15 10:02:18 CET    52min ago fwupd-refresh.timer          fwupd-refresh.service
+Sun 2026-02-15 12:24:04 CET 1h 29min Sun 2026-02-15 10:43:10 CET    11min ago dnf-makecache.timer          dnf-makecache.service
+Mon 2026-02-16 00:00:00 CET      13h -                                      - backup-lvdata.timer          backup-lvdata.service
+Mon 2026-02-16 00:00:00 CET      13h Sun 2026-02-15 00:00:05 CET            - unbound-anchor.timer         unbound-anchor.service
+Mon 2026-02-16 00:15:19 CET      13h Thu 2026-02-12 10:49:22 CET            - fstrim.timer                 fstrim.service
+Mon 2026-02-16 00:24:33 CET      13h Sun 2026-02-15 05:17:36 CET            - logrotate.timer              logrotate.service
+Mon 2026-02-16 00:28:51 CET      13h Sun 2026-02-15 05:30:24 CET            - plocate-updatedb.timer       plocate-updatedb.service
+Mon 2026-02-16 09:16:00 CET      22h Sun 2026-02-15 09:16:00 CET 1h 38min ago systemd-tmpfiles-clean.timer systemd-tmpfiles-clean.service
+Sun 2026-02-22 01:00:00 CET   6 days Sun 2026-02-15 05:10:13 CET            - raid-check.timer             raid-check.service
+
+9 timers listed.
+Pass --all to see loaded but inactive timers, too.

@@ -1,0 +1,19 @@
+
+ex7 login fail
+
+sudo vim /etc/ssh/sshd_config
+    PasswordAuthentication no
+    PubkeyAuthentication no
+    PermitRootLogin no
+    MaxAuthTries 3
+
+sudo firewall-cmd --permanent --add-service=ssh --zone=public
+sudo firewall-cmd --permanent --remove-service=http --zone=public
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-all
+
+ssh -i ~/.ssh-rhel/rhel_usb_key bob@192.168.1.62
+# login with pass should fail
+
+
+

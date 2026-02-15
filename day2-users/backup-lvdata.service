@@ -1,0 +1,7 @@
+[Unit]
+Description=Daily lvdata backup
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/local/bin/backup-lvdata.sh
