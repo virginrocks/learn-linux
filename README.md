@@ -26,7 +26,6 @@
 
 **Access:** SSH bob@192.168.2.100 (ed25519 key), Cockpit:9090
 
-
-[source] (https://www.redhat.com/en/blog/suid-sgid-sticky-bit)
-[source] (https://www.redhat.com/en/blog/linux-access-control-lists)
-[source] (https://www.redhat.com/en/blog/linux-user-account-management)
+[https://www.redhat.com/en/blog/suid-sgid-sticky-bit]
+[https://www.redhat.com/en/blog/linux-access-control-lists]
+[https://www.redhat.com/en/blog/linux-user-account-management]
