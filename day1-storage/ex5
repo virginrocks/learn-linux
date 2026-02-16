@@ -48,7 +48,7 @@ Recap
  ---------------------------------------
 | useradd -u xxxx | xxxx: user id        |
 |----------------------------------------|
-| usermod -aG u g | add u to g           |
+| usermod -aG u g | add u to secndary grp|
 |----------------------------------------|
 | setfacl         | set ACL's            |
 |----------------------------------------|
