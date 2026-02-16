@@ -26,3 +26,4 @@
 
 **Access:** SSH bob@192.168.2.100 (ed25519 key), Cockpit:9090
 
+[source](https://www.redhat.com/en/blog/suid-sgid-sticky-bit)
