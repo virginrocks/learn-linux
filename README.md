@@ -26,7 +26,7 @@
 **Cert:** EX200 ($400) target March
 **Freelance:** "Rocky/RHEL sysadmin + LVM + Ansible" gigs
 
-[Sources]
+:pushpin: [Sources]
 
 [https://www.redhat.com/en/blog/suid-sgid-sticky-bit]
 
