@@ -9,3 +9,86 @@ It's a performance-based, 2.5-hour test on live systems without internet access;
 
 Ideal Candidates
 Targets Linux admins seeking validation, RHCE path followers, or DevOps pros needing RHEL/container fundamentals; skills transfer to general Linux roles. Given your RHCSA pursuit on Arch/Ubuntu setups, it builds directly on your LVM/LUKS/virtualization
+
+GLOSSARY
+    touch
+    mkdir -p
+    ls -lah, -ld, -lZ, -lZd
+    sed -i 's/old/new/g' /file
+    cat file | awk '{print $1}'
+    tail
+    head
+    rsync -a
+    cp -a
+    tar czf
+    dd if=/dev/urandom of=/file bs=1M count=
+    dd bs=512m count=4 if=/dev/urandom iflag=fullblock | install -m 600 /dev/stdin /dir/name.key
+    fdisk
+    mkfs.xfs
+    mount -a ALL, -t FS -o OPTIONS
+    umount 
+    findmount --verify
+    blkid -s UUID -o value
+    lsblk -fp
+    df -hT
+    du -h -d1
+    /etc/fsatb
+    fs: ext4, xfs, vfat, tmpfs
+    systemctl --user daemon-reload, enable --now, disable, start, stop ,status, list-units/timers 
+    journalctl --user -u $name 
+    free
+    pvcreate
+    vgcreate
+    lvcreate
+    cryptsetup: luksFormat, luksOpen, luksBackupHeader
+    pvs / pvscan
+    vgs / vgscan
+    lvs / lvscan
+    lvextend
+    xfs_growfs
+    useradd -u
+    groupadd
+    usemod
+    id
+    setfacl
+    getfacl
+    xfs_quota -x -c 'limit -u bsoft= bhard= user' /dir
+    xfs_quota -x -c 'report -h'
+    whoami
+    hostname
+    passwd user, -Sa
+    getent passwd, group
+    visudo
+    su -
+    ssh-keygen -d algo -C name@host -f ~/.ssh/dir
+        -> Enter passphrase -> creates dir.pub & dir.key
+    ssh-copy-id -i ~/.ssh/dir.pub user@ip_addr
+    sshad /etc/ssh/sshd_config
+    firewall-cmd --permanent --add/remove-service=$service --zone=$zone / --add_port=8080/tcp 
+    firewall-cmd --reload / --list-all, --info-service=http
+    /etc/systemd/system/$name.service
+    /etc/systemd/system/$name.timer
+    nmcli device status, con up, con show $name 
+5   nmcli con add type ethernet ifname enp0s25 con-name static-lan ipv4.method manual ipv4.addresses 192.168.2.100/24 ipv4.gateway 192.168.2.1 ipv4.dns 8.8.8.8
+    ip addr show $device
+    hostnamectl status, set-hostname
+    /etc/hosts
+    ping -c3
+    httpd /etc/httpd/conf/httpd.conf
+    curl
+    wget
+    getenforce
+    setenforce=0/1
+    sestatus
+    podman version, pull, ps, run, start, stop, rm -f
+    ausearch -m AVC -ts recent | grep httpd
+    semanage fcontext -a -t 
+    restorecon
+    getsebool
+    setsebool
+    quadlet ~/.config/containers/systemd/$nam.container
+
+
+
+
+

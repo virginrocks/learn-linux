@@ -55,7 +55,7 @@ Manual test
     tail /var/log/backup.log
 
 Artifact
-    sudo touch acl-quota -- sudo getfacl /mnt/lvdata | sudo tee acl-quota
+    sudo touch acl-quota && sudo getfacl /mnt/lvdata | sudo tee acl-quota
     sudo xfs_quota -x -c 'report -h' /mnt/lvdata | sudo tee -a acl-quota
     sudo systemctl list-timers > timers-list.txt
     sudo cp /etc/systemd/system/baackup-lvdata.*
