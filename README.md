@@ -6,7 +6,7 @@
 |-----------|-----------|---------------|----------|
 | 192.168.2.100 | enp0s25 | /mnt/data /mnt/lvdata | sshd httpd backup.timer |
 
-## Week 1 Complete :datrt: (Days 1-3) 
+## Week 1 Complete :dart: (Days 1-3) 
 | Day | Topic | Status | Key Results |
 |-----|-------|--------|-------------|
 | 1 | Storage | :white_check_mark: | fstab UUID=5c8fdd36..., LVM vgday1-lvdata 4.5G, alice quota 110M |
