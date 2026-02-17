@@ -1,0 +1,15 @@
+
+Fix with semanage
+
+    # Check correct context:
+    ls -Z /var/www/html
+    ls -Z /webcontent
+
+    # Set correct context:
+    sudo semanage fcontext -a -t httpd_sys_content_t "/webcontent(/.*)?"
+    sudo restorecon -Rv /webcontent
+    ls -Z /webcontent
+
+    # Test:
+    curl localhost  # SUCCESS!
+

@@ -1,0 +1,12 @@
+
+Podman Basics
+    # Pull nginx:
+    podman pull nginx
+
+    # Run container:
+    podman run -d --name day4-nginx -p 8080:80 nginx
+    podman ps
+
+    # Test:
+    curl localhost:8080
+

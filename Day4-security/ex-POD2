@@ -1,0 +1,15 @@
+
+Exercise 6: Persistent Volumes (Day 1 storage)
+
+    # Mount /mnt/lvdata into container:
+    sudo mkdir -p /mnt/lvdata/webroot
+    echo "<h1>Day 4: Container + LVM Volume</h1>" | sudo tee /mnt/lvdata/webroot/index.html
+
+    podman run -d --name nginx-lvm -p 8081:80 -v /mnt/lvdata/webroot:/usr/share/nginx/html:Z nginx
+        Error: lsetxattr(label=system_u:object_r:container_file_t:s0:c283,c375) /mnt/lvdata/webroot: operation not permitted
+        podman rm -f nginx-lvm
+        sudo chcon -Rt container_file_t /mnt/lvdata/webroot
+        sudo ls -Zd /mnt/lvdata/webroot
+    podman run -d --name nginx-lvm -p 8081:80 -v /mnt/lvdata/webroot:/usr/share/nginx/html:Z nginx
+    curl localhost:8081
+

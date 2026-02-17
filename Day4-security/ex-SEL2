@@ -1,0 +1,13 @@
+
+SELinux Mastery
+    # Check current mode
+        getenforce
+        sestatus |grep "Current mode"
+    
+    # Test permissive (temp):
+        sudo setenforce 0
+        getenforce
+
+    # Back to enforcing:
+        sudo setenforce 1
+        getenforce

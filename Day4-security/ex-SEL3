@@ -1,0 +1,15 @@
+
+File Contexts (Apache scenario)
+    # Create custom web directory:
+    sudo mkdir -p /webcontent
+    echo "<h1>Day 4 SELinux Test</h1>" | sudo tee /webcontent/index.html
+
+    # Apache can't read (SELinux blocks):
+    sudo vi /etc/httpd/conf/httpd.conf
+    # Change: DocumentRoot "/webcontent"
+    sudo systemctl restart httpd
+    curl localhost  # FAILS (403 Forbidden)
+
+    # Check SELinux denials:
+    sudo ausearch -m AVC -ts recent | grep httpd
+		type=AVC msg=audit(1771255171.088:482): avc:  denied  { getattr } for  pid=5362 comm=httpd path=/webcontent/index.html dev=dm-1 ino=20758803 scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:default_t:s0 tclass=file permissive=0
