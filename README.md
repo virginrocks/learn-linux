@@ -18,7 +18,7 @@
 ## Week 2: Advanced ⏳ (Days 4-7)
 | Day | Topic | Status | Key Results |
 |-----|-------|--------|-------------|
-| 4 | SELinux/podman | ✅ | semanage, getsebool, chcon, podman run nginx...8081:80 |
+| 4 | SELinux/podman | ✅ | semanage, getsebool, chcon, podman run, quadlet |
 | 5 | Kernel/boot      | ⏳ |                                                   |
 | 6 | RHCSA mock       |                                                    |
 | 7 | Review/profile   |                                                    |
