@@ -4,9 +4,9 @@
 ## Environment: Rocky Linux 10 (/dev/sda SSD)
 | IP Static | Interface | Day 1 Storage | Services |
 |-----------|-----------|---------------|----------|
-| 192.168.2.100 | enp0s25 | /mnt/ex1 /mnt/lvdata | sshd httpd backup.timer |
+| 192.168.2.100 | enp0s25 | /mnt/data /mnt/lvdata | sshd httpd backup.timer |
 
-## Week 1 Complete ✅ (Days 1-3)
+## Week 1 Complete 🎯 (Days 1-3) 
 | Day | Topic | Status | Key Results |
 |-----|-------|--------|-------------|
 | 1 | Storage | ✅ | fstab UUID=5c8fdd36..., LVM vgday1-lvdata 4.5G, alice quota 110M |
@@ -16,17 +16,17 @@
 **RHCSA Coverage:** 60% (Storage/Users/Net/Services)
 
 ## Week 2: Advanced (Days 4-7)
-- **Day 4:** SELinux + podman containers
-- **Day 5:** Kernel modules + boot troubleshooting  
-- **Day 6:** RHCSA mock exam 1 (EX200 sim)
-- **Day 7:** Weak areas + Upwork profile
+| Day | Topic | Status | Key Results |
+|-----|-------|--------|-------------|
+| 4 | SELinux/podman ⏳| semanage, getsebool, chcon, podman run...8081:80 |
+| 5 | Kernel/boot      |                                                    |
+| 6 | RHCSA mock       |                                                    |
+| 7 | Review/profile   |                                                    |
 
-**Cert:** EX200 ($400) target Feb 28
+**Cert:** EX200 ($400) target March
 **Freelance:** "Rocky/RHEL sysadmin + LVM + Ansible" gigs
 
-**Access:** SSH bob@192.168.2.100 (ed25519 key), Cockpit:9090
-
-[Source]
+[Sources]
 
 [https://www.redhat.com/en/blog/suid-sgid-sticky-bit]
 
