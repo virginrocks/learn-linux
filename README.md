@@ -15,7 +15,7 @@
 
 **RHCSA Coverage:** 60% (Storage/Users/Net/Services)
 
-## Week 2: Advanced (Days 4-7)
+## Week 2: Advanced ⏳ (Days 4-7)
 | Day | Topic | Status | Key Results |
 |-----|-------|--------|-------------|
 | 4 | SELinux/podman | ⏳ | semanage, getsebool, chcon, podman run...8081:80 |
