@@ -1,0 +1,11 @@
+RHCSA stands for Red Hat Certified System Administrator. It's an entry-level certification validating core system administration skills on Red Hat Enterprise Linux (RHEL).
+redhat
+
+Key Skills Covered
+The RHCSA exam (EX200) tests hands-on abilities like file management, shell scripting, storage configuration with LVM and partitions, user/group management, basic networking, security (firewall, SELinux), and container basics.
+
+Exam Details
+It's a performance-based, 2.5-hour test on live systems without internet access; passing score is around 70% (210/300). Prep often involves Red Hat courses RH124/RH134 or self-study.
+
+Ideal Candidates
+Targets Linux admins seeking validation, RHCE path followers, or DevOps pros needing RHEL/container fundamentals; skills transfer to general Linux roles. Given your RHCSA pursuit on Arch/Ubuntu setups, it builds directly on your LVM/LUKS/virtualization
