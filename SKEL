@@ -1,0 +1,59 @@
+
+RHCSA COURSE SKEL
+
+    fstab / mkfs / mount
+
+    df / tmpfs / systemctl
+
+    lsblk / free / pvcreate / vgcreate / lvcreate
+
+    pvs / vgs / lvs / lvextend / xfs_growfs / df -hT
+
+    useradd / groupadd / usermod / id / setfacl / getfacl / mount -o / xfs_quota
+
+    whoami / id / hostname
+
+    useradd / passwd 
+
+    getent / id
+
+    getent paswd / getent group
+
+    visudo / sshd /  ssh-keygen / ssh-copy-id / /etc/ssh/sshd_config / firewall-cmd / ssh -i
+
+    /etc/systemd/system / systemd timer / systemd service / systemctl list-timers /systemctl list-units
+
+    nmcli device status / ip addr show / hostnamectl /firewall-cmd --state
+
+    nmcli con add / con up / con show / ip addr show
+
+    /etc/hots / ping / hostnamectl status
+
+    firewall-cmd --permanent --add-service= --zone=
+
+    firewall-cmd --permanent --add-port= --zone=
+
+    firewall-cmd --reload / --list-all / --info-service
+
+    httpd
+
+    getenfrce / sestatus / podman version
+
+    setenforce
+
+    /etc/httpd/conf/httpd.conf / curl / ausearch -m AVC
+
+    ls -Z / ls -Zd / semanage fcontext / restorecon
+
+    getsebool / setsebool
+
+    podman pull / podman run / curl
+
+    podamn run -d -name -p / podman ps / chcon -Rt / setsebool 
+
+    quadlet / /.config/containers/systemd/nginx-lvm.container / systemctl --user 
+
+    journalctl --user -u nginx-lvm -f
+
+    systemctl --user start/stop/restart nginx-lvm
+

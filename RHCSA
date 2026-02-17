@@ -15,7 +15,7 @@ GLOSSARY
     mkdir -p
     ls -lah, -ld, -lZ, -lZd
     sed -i 's/old/new/g' /file
-    cat file | awk '{print $1}'
+    lsblk -fp | awk '{print $2 $4}' | sort -h
     tail
     head
     rsync -a
