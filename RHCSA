@@ -22,7 +22,7 @@ GLOSSARY
     cp -a
     tar czf
     dd if=/dev/urandom of=/file bs=1M count=
-    dd bs=512m count=4 if=/dev/urandom iflag=fullblock | install -m 600 /dev/stdin /dir/name.key
+    dd bs=512 count=4 if=/dev/urandom iflag=fullblock | install -m 600 /dev/stdin /dir/name.key
     fdisk
     mkfs.xfs
     mount -a ALL, -t FS -o OPTIONS
