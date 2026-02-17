@@ -1,0 +1,9 @@
+[Container]
+ContainerName=nginx-lvm
+Image=nginx:latest
+PublishPort=8081:80
+Volume=/mnt/lvdata/webroot:/usr/share/nginx/html:z
+
+[Unit]
+Description=Day 4 RHCSA nginx-lvm Quadlet
+After=network.target

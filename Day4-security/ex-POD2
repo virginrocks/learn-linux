@@ -13,3 +13,31 @@ Exercise 6: Persistent Volumes (Day 1 storage)
     podman run -d --name nginx-lvm -p 8081:80 -v /mnt/lvdata/webroot:/usr/share/nginx/html:Z nginx
     curl localhost:8081
 
+    #After few atemps, running sudo podman run -d --name ...
+    -> exit 
+    -> run podman -d ... OK
+    getsebool -a | grep container
+        container_connect_any --> off
+        container_manage_cgroup --> on
+        container_modify_selinux_labels --> off
+        container_read_certs --> off
+        container_use_cephfs --> off
+        container_use_devices --> off
+        container_use_dri_devices --> on
+        container_use_ecryptfs --> off
+        container_use_xserver_devices --> off
+        container_user_exec_content --> on
+        logrotate_read_inside_containers --> off
+
+    sudo ls -Zd /mnt/lvdata/webroot 
+        system_u:object_r:container_file_t:s0 /mnt/lvdata/webroot
+
+    podman ps
+        CONTAINER ID  IMAGE                           COMMAND               CREATED         STATUS         PORTS                 NAMES
+        f6c52e0025ca  docker.io/library/nginx:latest  nginx -g daemon o...  10 minutes ago  Up 10 minutes  0.0.0.0:8081->80/tcp  nginx-lvm
+
+    curl localhost:8081
+          % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                         Dload  Upload   Total   Spent    Left  Speed
+          0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    39  100    39    0     0  28613      0 --:--:-- --:--:-- --:--:-- 39000
+        <h2>Day 4: Container + LVM Volume</h2>

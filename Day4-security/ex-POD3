@@ -1,0 +1,48 @@
+
+Quadlet Container Service (systemd deprecated)
+    Create quadlet file
+        mkdir -p ~/.config/containers/systemd/nginx-lvm.container
+        cat > ~/.config/containers/systemd/nginx-lvm.container << 'EOF'
+        [Container]
+        ContainerName=nginx-lvm
+        Image=nginx:latest
+        PublishPort=8081:80
+        Volume=/mnt/lvdata/webroot:/usr/share/nginx/html:z
+        [Unit]
+        Description=Day 4 RHCSA nginx-lvm Quadlet
+        After=network.target
+        EOF
+
+    Reload & enable
+        systemctl --user daemon-reload
+        systemctl --user enable --now nginx-lvm
+        systemctl --user status nginx-lvm
+
+    Test Quadlet
+        curl localhost:8081
+          % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                         Dload  Upload   Total   Spent    Left  Speed
+          0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    39  100    39    0     0  43526      0 --:--:-- --:--:-- --:--:-- 39000
+<h        2>Day 4: Container + LVM Volume</h2>
+
+        podman ps
+            CONTAINER ID  IMAGE                           COMMAND               CREATED        STATUS        PORTS                 NAMES
+            af6f6a8894d5  docker.io/library/nginx:latest  nginx -g daemon o...  2 minutes ago  Up 2 minutes  0.0.0.0:8081->80/tcp  nginx-lvm
+
+        journalctl --user -u nginx-lvm -f
+            No journal files were found.
+            -- No entries --
+
+    Stop & Start
+        systemctl --user stop container-nginx-lvm
+        systemctl --user start container-nginx-lvm
+        systemctl --user restart container-nginx-lvm
+
+    Quadlet vs Old Systemd
+        | Feature  | Quadlet                                  | Old podman generate systemd |
+        | -------- | ---------------------------------------- | --------------------------- |
+        | Location | ~/.config/containers/systemd/*.container | ~/.config/systemd/user/     |
+        | Reload   | systemctl --user daemon-reload           | Manual file move            |
+        | SELinux  | Native :z volumes                        | Manual tweaks               |
+        | Modern   | Podman 4.4+ standard                     | Deprecated warning          |
+

@@ -11,15 +11,15 @@
 |-----|-------|--------|-------------|
 | 1 | Storage | ✅ | fstab UUID=5c8fdd36..., LVM vgday1-lvdata 4.5G, alice quota 110M |
 | 2 | Users/Services | ✅ | bob(devs,wheel), sudo NOPASSWD systemctl, backup-lvdata.timer |
-| 3 | Networking | ✅ | 192.168.2.100 static, Apache+firewalld, http://192.168.2.100 |
+| 3 | Networking |  ✅ | 192.168.2.100 static, Apache+firewalld, http://192.168.2.100 |
 
 **RHCSA Coverage:** 60% (Storage/Users/Net/Services)
 
 ## Week 2: Advanced ⏳ (Days 4-7)
 | Day | Topic | Status | Key Results |
 |-----|-------|--------|-------------|
-| 4 | SELinux/podman | ⏳ | semanage, getsebool, chcon, podman run nginx...8081:80 |
-| 5 | Kernel/boot      |                                                    |
+| 4 | SELinux/podman | ✅ | semanage, getsebool, chcon, podman run nginx...8081:80 |
+| 5 | Kernel/boot      | ⏳ |                                                   |
 | 6 | RHCSA mock       |                                                    |
 | 7 | Review/profile   |                                                    |
 

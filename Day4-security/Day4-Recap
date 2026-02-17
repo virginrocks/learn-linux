@@ -1,0 +1,13 @@
+
+DAY 4 COMPLETE! SELinux + Containers ✅
+
+    ✅ Podman nginx: localhost:8081 → /mnt/lvdata/webroot
+    ✅ systemd Quadlet: active 13s, 27 workers
+    ✅ SELinux volume mount: resolved (:z shared)
+
+    | Day 4 | Topic    | Status                           |
+    | ----- | -------- | -------------------------------- |
+    | Ex1-3 | SELinux  | ✅ contexts, semanage, restorecon |
+    | Ex4   | Booleans | ✅ httpd_can_network_connect      |
+    | Ex5-6 | Podman   | ✅ nginx:8080 + LVM volume:8081   |
+    | Ex7   | Quadlet  | ✅ systemd rootless container     |
