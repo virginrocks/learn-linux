@@ -1,0 +1,59 @@
+All Exercises Mastered (No Solutions - Practice List)
+
+    Day 1: Storage (6 exercises)
+
+        Create partition on /dev/vdb1, format ext4, mount /mnt/practice manually
+
+        Add /dev/vdb1 to fstab using UUID for persistent mount
+
+        Add tmpfs RAM disk to fstab with size and mode options
+
+        Create LVM PV VG LV on /dev/vdb2, format mount /mnt/lvpractice
+
+        Extend LV from 3G to 4.5G and grow XFS filesystem online
+
+        Set ACLs for practice user and devs group on /mnt/lvpractice plus quotas
+
+    Day 2: Users/Services (7 exercises)
+
+        Create bob and charlie users in devs and wheel groups
+
+        Configure sudoers so devs group can run systemctl without password
+
+        Generate ed25519 SSH keypair on Arch and copy to RHEL bob user
+
+        Harden sshd_config to disable password auth and root login
+
+        Configure firewalld to allow only SSH service
+
+        Create backup script for /mnt/lvpractice to /mnt/practice
+
+        Create systemd timer to run backup daily at 2AM
+
+    Day 3: Networking (4 exercises)
+
+        Configure static IP 192.168.2.100/24 on enp0s25 using nmcli
+
+        Set hostname rhel-sysadmin.lan and update /etc/hosts
+
+        Configure firewalld public zone for ssh http and port 8080/tcp
+
+        Install Apache and create custom index.html with hostname and date
+
+    Day 4: SELinux/Containers (7 exercises)
+
+        Toggle SELinux enforcing to permissive and back
+
+        Change Apache DocumentRoot to /webcontent and observe 403 denial
+
+        Fix Apache /webcontent access using semanage fcontext and restorecon
+
+        Enable httpd_can_network_connect SELinux boolean
+
+        Run nginx container on port 8080 using podman
+
+        Mount /mnt/lvpractice/webroot volume into nginx container port 8081
+
+        Create systemd Quadlet for nginx-lvm container with persistent volume
+
+Total: 24 exercises mastered. Practice in order to simulate RHCSA 2.5h exam.
