@@ -2,6 +2,7 @@
 RHCSA COURSE SKEL
 
     STORAGE     
+
     fstab / mkfs / mount /umount
 
     df / tmpfs / systemctl
