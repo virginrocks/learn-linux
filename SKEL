@@ -1,8 +1,7 @@
 
 RHCSA COURSE SKEL
 
-    :disk: STORAGE     
-
+    STORAGE     
     fstab / mkfs / mount /umount
 
     df / tmpfs / systemctl
@@ -12,7 +11,7 @@ RHCSA COURSE SKEL
     pvs / vgs / lvs / lvextend / xfs_growfs / df -hT
 
 
-    :bust_in_sihouette: USERS & SERVICES 
+    USERS & SERVICES 
 
     useradd / groupadd / usermod / id / setfacl / getfacl / mount -o / xfs_quota
 
@@ -29,7 +28,7 @@ RHCSA COURSE SKEL
     /etc/systemd/system / systemd timer / systemd service / systemctl list-timers /systemctl list-units
 
 
-    :computer: NETWORKING
+    NETWORKING
 
     nmcli device status / ip addr show / hostnamectl /firewall-cmd --state
 
@@ -46,7 +45,7 @@ RHCSA COURSE SKEL
     httpd
 
 
-    :large_blue_diamond: SELINUX & PODMAN
+    SELINUX & PODMAN
 
     getenfrce / sestatus / podman version
 
