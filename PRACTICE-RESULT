@@ -1,0 +1,176 @@
+Day 1: Storage (6 exercises)
+    Create partition on /dev/vdb1, format ext4, mount /mnt/practice manually
+        ll /mnt 
+        lsblk -fp 
+        sudo fdisk /dev/sda (new part 2G) 
+        sudo mkfs.ext4 /dev/sda7, 
+        Add /dev/vdb1 to fstab using UUID for persistent mount
+        sudo mkdir /mnt/practice && sudo chown -R devi:devi /mnt/practice && sudo mount /dev/sda7 /mnt/practice && df -h /mnt/practice 
+        sudo cp /etc/fstab /mnt/practice/fstab-18-02-26.back 
+        sudo chown -R devi:devi /mnt/practice 
+        sudo blkid -s UUID -o value /dev/sda7 
+        sudo echo 'UUID=7782a697-b5df-4c58-bdd9-84774851aeb1 /mnt/practice ext4 defaults,noatime 0 2' | sudo tee -a /etc/fstab && cat /etc/fstab 
+        sudo systemctl daemon-reload 
+
+    Add tmpfs RAM disk to fstab with size and mode options
+        sudo umount /mnt/practice && sudo mount -a && sudo lsblk -fp | grep /dev/sda7 && sudo df -h /mnt/practice
+        sudo mkdir /mnt/tmp2
+        sudo echo tmpfs /mnt/tmp2 tmpfs defaults,noatime,mode=1777,size=512m 0 0 | sudo tee -a /etc/fstab && sudo cat /etc/fstab
+        sudo systemctl daemon-reload 
+        sudo mount -a && sudo mount | grep /mnt
+        sudo df -hT tmp
+        ls -lha /mnt/ | grep tmp2
+
+    Create LVM PV VG LV on /dev/vdb2, format mount /mnt/lvpractice
+        sudo fdisk /dev/sda (new part 5G)
+        sudo pvcreate /dev/sda8 
+        sudo vgcreate vgpractice /dev/sda8
+        sudo lvcreate -L 3G vgpractice -n lvpractice
+        sudo mkfs.xfs /dev/mapper/vgpractice-lvpractice
+        sudo mkdir /mnt/lvpractice && sudo chown -R devi:devi /mnt/lvpractice
+        sudo mount /dev/mapper/vgpractice-lvpractice /mnt/lvpractice && sudo mount | grep lvpractice
+        df -hT /mnt/lvpractice
+        sudo vgs | grep practice && sudo lvs | grep practice
+
+    Extend LV from 3G to 4.5G and grow XFS filesystem online
+        sudo lvextend -L +1.5G /dev/mapper/vgpractice-lvpractice
+        sudo xfs_growfs /dev/vgpractice/lvpractice
+        sudo lvs
+        sudo blkid -s UUID -o value /dev/mapper/vgpractice-lvpractice
+        sudo echo 'UUID=ff58a2cb-52f5-439f-aca9-00512734bd02 /mnt/lvpractice xfs defaults,noatime 0 2' | sudo tee -a /etc/fstab && sudo findmnt --verify
+        sudo systemctl daemon-relaod
+        sudo umount /mnt/lvpractice && sudo mount -a && sudo mount | grep lvpractice
+
+    Set ACLs for practice user and devs group on /mnt/lvpractice plus quotas
+        sudo useradd -u 1108 practice
+        sudo usermod -aG devs practice
+        id practice
+        sudo setfacl -m u:practice:rwx /mnt/lvpractice
+        sudo setfacl -m d:u:practice:rwx /mnt/lvpractice
+        sudo setfacl -m g:devs:rx /mnt/lvpractice
+        sudo setfacl -m d:g:devs:rx /mnt/lvpractice
+        sudo getfacl /mnt/lvpractice
+        sudo umount /mnt/lvpractice && sudo mount -t xfs -o "rw,uquota,gquota" /dev/mapper/vgpractice-lvpractice /mnt/lvpractice
+        sudo findmnt --verify
+        cat /etc/fstab
+        sudo sed -i '29s/noatime/noatime,uquota,gquota/g' /etc/fstab && cat /etc/fstab
+        sudo systemctl daemon-reload
+        sudo mount -o remount /mnt/lvpractice
+        sudo findmnt --verify
+        sudo xfs_quota -x -c 'limit -u bsoft=120m bhard=125m practice' /mnt/lvpractice
+        sudo xfs_quota -x -c 'report -h' /mnt/lvpractice
+        sudo passwd practice
+        su - practice
+        dd bs=1M count=150 if=/dev/uandom of=/mnt/lvpractice/practice.file
+        exit
+        sudo xfs_quota -x -c 'report -h' /mnt/lvpractice
+
+Day 2: Users/Services (7 exercises)
+    Create bob and charlie users in devs and wheel groups
+        sudo useradd andrew
+        sudo useradd lola
+        sudo usermod -aG devs,wheel andrew
+        sudo usermod -aG devs lola
+        sudo passwd andrew
+        sudo passwd lola
+        sudo getent group devs
+        sudo getent group wheel
+
+    Configure sudoers so devs group can run systemctl without password
+        sudo visudo
+        %devs ALL=(ALL) NOPASSWD: /usr/bin/systemctl * 
+        %devs ALL=(ALL) NOPASSWD: /bin/mount /mnt/lvpractice, /bin/umount /mnt/lvpractice
+
+	Generate ed25519 SSH keypair on Arch and copy to RHEL bob user
+    [arch]# ssh-keygen -t ed25519 -C "devi@brahma" -f ~/.ssh-pr/pactice
+		sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+		sudo ssh-copy-id -i ~/.ssh/practice.pub andrew@192.168.1.62
+		ssh -i ~/.ssh/practice 'andrew@192.168.1.62'
+
+	Harden sshd_config to disable password auth and root login
+		sudo vim /etc/ssh/sshd_config
+			PermitRootLogin no 
+			PasswordAuthentication no
+
+	Configure firewalld to allow only SSH service
+		sudo firewall-cmd --list-all
+		sudo firewall-cmd --permanent --zone=public --add-service=ssh
+		sudo firewall-cmd --permanent --zone=public --remove-service=http
+		sudo firewall-cmd --reload
+		sudo firewall-cmd --list-all
+
+	Create backup script for /mnt/lvpractice to /mnt/practice
+		sudo touch /usr/local/bin/backup-lvpractice.sh && sudo chmod +x /usr/local/bin/backup-lvpractice.sh
+		sudo echo '#!/bin/bash \nsudo tar czf /mnt/practice/backup-lvpractice-$(date +%Y%m%d).tar.gz --directory /mnt/lvpractice . 2>/dev/null' | sudo tee /usr/local/bin/backup-lvpractice.sh
+
+	Create systemd timer to run backup daily at 2AM
+        sudo echo -e "[Unit] \nDesccription=Daily lvpractice Backup \n[Service] \nType=oneshot \nUser=root \nExecStart=/usr/local/bin/backup-lvpractice.sh" | sudo tee /etc/systemd/system/backup-lvpractice.service
+        sudo echo -e "[Unit] \nDescription=Run lvpractice backup daily at 2AM\n\n[Timer]\nOnCalendar=*_*_* 2:00:00\nPersistent=true\n\n[Install]\n\WantedBy=timers.target" | sudo tee /etc/systemd/system/backup-lvpractice.timer
+		Test: sudo systemctl start backup-lvpractice.service
+		ll /mnt/practice
+
+Day 3: Networking (4 exercises)
+    Configure static IP 192.168.2.100/24 on enp0s25 using nmcli
+		nmcli device status
+		ip addr show
+		hostnamectl
+		sudo firewall-cmd --state
+		sudo nmcli con add type ethernet ifname enp0s25 con-name practice-lan ipv4.method manual ipv4.addresses 192.168.2.100/24 ipv4.gateway 192.168.2.1 ipv4.dns 8.8.8.8
+		sudo nmcli con up practice-lan
+		ping -c3 archlinux.org
+		nmcli device status
+		nmcli con show practice-lan
+		sudo nmcli con show
+		ip route
+
+	Set hostname rhel-sysadmin.lan and update /etc/hosts
+		hostnamectl status
+		sudo hostnamectl set-hostname practice-sysadmin.lan
+		echo"192.168.2.100 practice-sysadmin.lan.localdomain practice-sysadmin.lan" | sudo tee -a /etc/hosts"
+
+	Configure firewalld public zone for ssh http and port 8080/tcp
+		sudo firewall-cmd --zone=public --list-all
+		sudo firewall-cmd --permanent --zone=public --add-service=http
+		sudo firewall-cmd --permanent --zone=public --add-service=ssh
+		sudo firewall-cmd --permanent --zone=public --add-port=8080/tcp
+		sudo firewall-cmd --zone=public --list-all
+
+	Install Apache and create custom index.html with hostname and date
+		sudo dnf list | grep httpd
+		systemctl status httpd
+		sudo systemctl start httpd
+		systemctl status httpd
+		sudo echo "<h1>Sys admin Course</h1>" | sudo tee /var/www/html/index.html
+		sudo systemctl restart httpd
+		curl practice-sysadmin.lan
+
+Day 4: SELinux/Containers (7 exercises)
+	Toggle SELinux enforcing to permissive and back
+		getenforce
+		sudo setenforce 0
+		getenforce
+		setenforce 1
+
+	Change Apache DocumentRoot to /webcontent and observe 403 denial
+		sudo mkdir /webpractice && sudo sed -i 's/var\/www\/html/webpractice/g' /etc/httpd/conf/httpd.conf && cat /etc/httpd/conf/httpd.conf | grep webpractice
+		crul -v practice-sysadmin.lan
+		lzd /webpractice
+
+	Fix Apache /webcontent access using semanage fcontext and restorecon
+		ausearch -m AVC -ts recent | grep http
+		sudo ls -Zd /webpractice
+		sudo ls -Zd /var/www/html
+		sudo semanage fcontext -a -t httpd_sys_content_t "/webpractice(/.*)?"
+		sudo restorecon -Rv /webpractice
+		lzd /webpractice
+		sudo echo "<\!DOCTYPE html><head><i>Practice<i></head><body style='background-color: #DDDDDD;'><p>webpractice</p><p>/webpractice folder has been semanage and restorecon</p><p>$(date)@$(hostname)</p></body>" | sudo tee /webpractice/index.html
+
+	Enable httpd_can_network_connect SELinux boolean
+		getsebool -a | grep httpd
+		sudo setebool -P httpd_can_network_connect on
+
+	Run nginx container on port 8080 using podman
+		podman pull nginx
+		podman run -d --name practice-nginx -p 8080:80 nginx
+		podman ps
+		curl localhost:8080
