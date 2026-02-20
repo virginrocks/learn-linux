@@ -52,7 +52,7 @@ All Exercises Mastered (No Solutions - Practice List)
 
         Run nginx container on port 8080 using podman
 
-        Mount /mnt/lvpractice/webroot volume into nginx container port 8081
+        Mount /mnt/lvpractice/webroot volume into nginx container port 8083
 
         Create systemd Quadlet for nginx-lvm container with persistent volume
 

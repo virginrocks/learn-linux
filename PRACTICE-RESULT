@@ -174,3 +174,30 @@ Day 4: SELinux/Containers (7 exercises)
 		podman run -d --name practice-nginx -p 8080:80 nginx
 		podman ps
 		curl localhost:8080
+
+	Mount /mnt/lvpractice/webroot volume into nginx container port 8081
+		mkdir -p /mnt/lvpractice/webroot
+		ls -Zd /mnt/lvpractice/webroot
+		sudo chcon -Rt container_file_t /mnt/lvpractice/webroot
+		sudo ls -Zd /mnt/lvpractice/webroot
+		getsebool -a | grep container
+		echo "<head>Practice</head><body style='background-color: #EEEEEE;'><p>podman nginx on LV</p><p>$(date)@$(hostname)</p></body>" | sudo tee /mnt/lvpractice/webroot/index.html
+		sudo chown -R devi:devi /mnt/lvpractice
+		podman run -d --name lvpractice-nginx -p 8083:80 -v /mnt/lvpractice/webroot:/usr/share/nginx/html:Z nginx
+		curl practice-sysadmin.lan:8083
+
+	Create systemd Quadlet for nginx-lvm container with persistent volume
+    Content of /home/devi/.config/containers/systemd/lvpractice-nginx.container:
+        [Container]
+        ContainerName=lvpractice-nginx
+        Image=nginx:latest
+        PublishPort=8083:80
+        Volume=/mnt/lvpractice/webroot:/usr/share/nginx/html:Z
+
+        [Unit]
+        Description=Practice LVM podman nginx container
+        After=network.target
+		systemctl --user daemon-reload
+		systemctl --user start lvpractice-nginx
+		podman ps
+		curl $HOSTNAME:8083

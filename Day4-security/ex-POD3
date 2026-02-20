@@ -1,7 +1,7 @@
 
 Quadlet Container Service (systemd deprecated)
     Create quadlet file
-        mkdir -p ~/.config/containers/systemd/nginx-lvm.container
+        touch ~/.config/containers/systemd/nginx-lvm.container
         cat > ~/.config/containers/systemd/nginx-lvm.container << 'EOF'
         [Container]
         ContainerName=nginx-lvm
@@ -15,7 +15,7 @@ Quadlet Container Service (systemd deprecated)
 
     Reload & enable
         systemctl --user daemon-reload
-        systemctl --user enable --now nginx-lvm
+        systemctl --user start nginx-lvm
         systemctl --user status nginx-lvm
 
     Test Quadlet
