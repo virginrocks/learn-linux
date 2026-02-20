@@ -187,9 +187,9 @@ Day 4: SELinux/Containers (7 exercises)
 		curl practice-sysadmin.lan:8083
 
 	Create systemd Quadlet for nginx-lvm container with persistent volume
-    Content of /home/devi/.config/containers/systemd/lvpractice-nginx.container:
+    Content of /home/devi/.config/containers/systemd/nginx-lvpractice.container:
         [Container]
-        ContainerName=lvpractice-nginx
+        ContainerName=nginx-lvpractice
         Image=nginx:latest
         PublishPort=8083:80
         Volume=/mnt/lvpractice/webroot:/usr/share/nginx/html:Z
@@ -197,6 +197,7 @@ Day 4: SELinux/Containers (7 exercises)
         [Unit]
         Description=Practice LVM podman nginx container
         After=network.target
+
 		systemctl --user daemon-reload
 		systemctl --user start lvpractice-nginx
 		podman ps
