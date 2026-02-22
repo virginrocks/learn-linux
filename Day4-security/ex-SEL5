@@ -1,9 +1,0 @@
-
-Boolean toggles
-    # List booleans:
-    getsebool -a | grep httpd
-
-    # Allow Apache network connections:
-    sudo setsebool -P httpd_can_network_connect on
-    getsebool httpd_can_network_connect
-

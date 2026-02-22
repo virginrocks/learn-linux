@@ -1,10 +1,8 @@
 
-Hostname + /etc/hosts
-    sudo hostnamectl set-hostname rhel-sysadmin.lan
-    sudo vim /etc/hosts
-        192.168.2.100   rhel-sysadmin.lan   rhel-sysadmin
-        192.168.1.62    Host-002.lan
+Firewalld Mastery
+    sudo firewall-cmd --permanent --add-service={ssh,hhtp} --zone=public
+    sudo firewall-cmd --permanent --add-port=8080/tcp --zone=public
+    sudo firewall-cmd --reload
+    sudo firewall-cmd --list-all
+    sudo firewall-cmd --info-service=http
 
-    Test
-        ping -c3 rhel-sysadmin.lan
-        hostnamectl status

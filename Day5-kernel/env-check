@@ -1,0 +1,5 @@
+uname -r
+lsmod | wc -l
+cat /proc/cmdline
+cd ~/learnLinux && mkdir -p day5-kernel && cd day5-kernel
+

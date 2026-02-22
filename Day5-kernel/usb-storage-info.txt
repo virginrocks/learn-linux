@@ -1,0 +1,35 @@
+alias:          usb:v03EEp6906d0003dc*dsc*dp*ic*isc*ip*in*
+alias:          usb:v03EBp2002d0100dc*dsc*dp*ic*isc*ip*in*
+depends:        
+intree:         Y
+name:           usb_storage
+retpoline:      Y
+vermagic:       6.12.0-124.31.1.el10_1.x86_64 SMP preempt mod_unload modversions 
+sig_id:         PKCS#7
+signer:         Rocky Linux kernel signing key
+sig_key:        27:65:68:30:43:26:60:0F:7B:08:74:2D:AF:F9:C8:0A:7C:2C:2C:4C
+sig_hashalgo:   sha256
+signature:      18:0A:FD:0F:D5:6A:CD:7A:D9:B2:23:AF:6A:6F:2B:6D:2A:65:4F:38:
+		43:55:B2:05:65:A6:90:A7:F0:AE:8D:E5:EB:46:F6:89:80:36:5C:2C:
+		DA:48:7A:CD:6A:2F:44:D9:C6:6A:2D:8C:B5:5F:7C:B9:CB:1E:EC:63:
+		36:3D:3F:A2:DF:D8:FB:C9:B7:F6:8E:13:E3:E1:E7:C1:F2:00:70:23:
+		10:18:9B:4A:51:0B:DE:7F:44:D8:1E:39:79:CA:C1:13:29:97:C3:E9:
+		E6:39:4A:A5:29:84:6E:97:55:81:90:87:ED:D5:A9:F1:F0:7F:FC:70:
+		79:E3:81:64:07:AE:33:60:48:A5:9E:A6:1E:97:13:29:35:23:98:CE:
+		FF:51:AF:5D:E8:6A:D3:3F:5F:0D:4E:43:E7:BF:B2:E2:5B:B7:38:E5:
+		E4:67:F3:55:9B:92:00:F9:48:A9:CC:03:C1:75:05:D0:60:52:4B:FD:
+		33:4D:01:85:E5:94:A9:A8:DF:48:60:23:41:71:06:75:DE:5A:DA:28:
+		12:8C:A0:B4:BC:92:C1:AA:69:0C:4B:9F:1C:1E:5A:E1:74:E5:ED:0F:
+		1F:B3:76:A5:78:36:6C:A2:8F:5E:02:6C:34:DE:4D:15:A2:11:C2:EF:
+		88:89:50:80:DA:C6:BE:B0:7B:5F:1A:18:C2:1D:42:0D:63:EF:AF:FB:
+		3F:F1:1A:5B:97:15:00:A2:54:31:F5:EB:BC:13:8B:10:85:58:7C:FF:
+		8A:B0:D6:FD:1D:F4:02:BD:34:6D:11:50:25:7F:21:C9:20:98:9A:0F:
+		1D:04:72:E2:91:36:6B:C9:34:FE:F8:17:27:B4:E0:7B:A6:CD:72:F2:
+		42:09:A3:9F:4C:CA:83:1C:01:32:59:22:4F:19:D1:85:E3:13:0F:86:
+		0B:FE:8E:A4:7E:98:4D:C9:49:4D:A3:AB:57:E7:78:A0:38:CF:50:EE:
+		22:F4:23:D1:82:D0:42:AA:AE:B2:A0:E1:BB:8D:2E:A5:37:7D:ED:D9:
+		68:D3:6F:5C
+parm:           option_zero_cd:ZeroCD mode (1=Force Modem (default), 2=Allow CD-Rom (uint)
+parm:           swi_tru_install:TRU-Install mode (1=Full Logic (def), 2=Force CD-Rom, 3=Force Modem) (uint)
+parm:           delay_use:time to delay before using a new device
+parm:           quirks:supplemental list of device IDs and their quirks (string)

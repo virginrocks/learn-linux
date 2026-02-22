@@ -1,0 +1,6 @@
+
+Environment check
+    nmcli device status
+    ip addr show
+    hostnamectl
+    firewall-cmd --state

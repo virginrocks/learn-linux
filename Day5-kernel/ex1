@@ -1,0 +1,13 @@
+# Check modules:
+lsmod | grep -i usb
+modinfo usb_storage
+
+# Load module:
+sudo modprobe usb_storage
+lsmod | grep usb_storage
+
+# Blacklist permanently:
+echo "blacklist usb_storage" | sudo tee /etc/modprobe.d/blacklist-usb.conf
+sudo dracut -f /boot/initramfs-$(uname -r).img $(uname -r)
+lsmod | grep usb_storage  # gone after reboot
+

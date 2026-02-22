@@ -19,7 +19,7 @@
 | Day | Topic | Status | Key Results |
 |-----|-------|--------|-------------|
 | 4 | SELinux/podman | :white_check_mark: | semanage, getsebool, chcon, podman run, quadlet |
-| 5 | Kernel/boot      | :hourglass_flowing_sand: |                                                   |
+| 5 | Kernel/boot      | :hourglass_flowing_sand: modules, fix boot |                                                   |
 | 6 | RHCSA mock       |                                                    |
 | 7 | Review/profile   |                                                    |
 

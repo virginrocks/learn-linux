@@ -199,6 +199,6 @@ Day 4: SELinux/Containers (7 exercises)
         After=network.target
 
 		systemctl --user daemon-reload
-		systemctl --user start lvpractice-nginx
+		systemctl --user start nginx-lvpractice
 		podman ps
 		curl $HOSTNAME:8083

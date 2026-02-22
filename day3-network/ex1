@@ -1,6 +1,11 @@
 
-Environment check
-    nmcli device status
-    ip addr show
-    hostnamectl
-    firewall-cmd --state
+Create Network Interface (eth1 static)
+    nmcli device status #list devices
+    sudo nmcli con add type ethernet ifname enp0s25 con-name static-lan ipv4.method manual ipv4.addresses 192.168.2.100/24 ipv4.gateway 192.168.2.1 ipv4.dns 8.8.8.8
+    
+    Activate
+        sudo nmcli con up static-lan
+        nmcli con show static-lan
+        ip addr show enp0s25
+
+

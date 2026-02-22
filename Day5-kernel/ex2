@@ -1,0 +1,22 @@
+# dummy iface
+echo "options dummy numdummies=2" | sudo tee /etc/modprobe.d/dummy.conf
+modprobe dummy numdummies=2
+ip link show - grep dummy
+
+# peristent: auto-load
+echo "dummy" | sudo tee /etc/modules-load.d/dummy.conf
+
+# systemd behavior: at reboot, dummy absent from ip link 
+File: /lib/modprobe.d/systemd.conf creates options dummy numdummies=0 
+    -> this overrides modules-load.d at reboot 
+	  -> this is why ip link show : no dummy iface appear
+
+# solution
+    # 1
+    sudo nmcli con add type dummy ifname dummy0 con-name dummy0 ipv4.method manual ipv4.addresses 192.168.2.50/24 ipV4.gateway 192.168.2.1 ipv4.dns 8.8.8.8
+    sudo nmcli con add type dummy ifname dummy1 con-name dummy1 ipv4.method manual ipv4.addresses 192.168.2.51/24 ipV4.gateway 192.168.2.1 ipv4.dns 8.8.8.8
+    sudo nmcli con up dummy1 dummy2
+    nmcli con show | grep dummy
+    # 2
+    echo "options dummy numdummies=2" | sudo tee /etc/modprobe.d/10-dummy.conf
+    sudo dracut -f
