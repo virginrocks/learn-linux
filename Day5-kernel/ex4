@@ -1,0 +1,40 @@
+Part 4 — Systemd Targets (Replaces Runlevels)
+
+| Target            | Old Runlevel | Description                                 |
+| ----------------- | ------------ | ------------------------------------------- |
+| poweroff.target   | 0            | Halt the system                             |
+| rescue.target     | 1            | Single-user, root shell, minimal services   |
+| multi-user.target | 3            | Full multi-user, no GUI                     |
+| graphical.target  | 5            | Full multi-user with GUI                    |
+| emergency.target  | —            | Bare minimum: root shell, root fs read-only |
+| reboot.target     | 6            | Reboot                                      |
+
+
+4.1 — Check and Change the Default Target
+
+# What target does the system boot into?
+systemctl get-default
+
+# List all active targets
+systemctl list-units --type=target
+
+# Set default to multi-user (no GUI)
+sudo systemctl set-default multi-user.target
+
+# Set it back to graphical
+sudo systemctl set-default graphical.target
+
+4.2 — Switch Targets Live (Without Reboot)
+
+# Drop to multi-user (kills GUI session!)
+sudo systemctl isolate multi-user.target
+
+# Go back to graphical
+sudo systemctl isolate graphical.target
+
+# Enter rescue mode (needs root password)
+sudo systemctl isolate rescue.target
+
+# Enter emergency mode (root fs is read-only!)
+sudo systemctl isolate emergency.target
+

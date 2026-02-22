@@ -1,0 +1,58 @@
+
+Part 3 — GRUB2 Bootloader In-Depth
+
+RHCSA Day 5 (Rewrite) — Kernel, Boot Process & GRUB on Rocky Linux VM
+
+This is an in-depth rewrite of Day 5 focusing entirely on the kernel, boot process, GRUB bootloader, systemd targets, and kernel modules — the areas where confidence matters most on exam day. We'll use a Rocky Linux 9 VM (via VirtualBox/KVM) for safe, repeatable practice.
+
+⚠️ Why not Podman? Containers share the host kernel and have no real bootloader, GRUB, or initramfs. You cannot practice boot interruption, GRUB editing, rd.break, or systemd target switching inside a container. Use a full VM (VirtualBox, KVM/libvirt, or GNOME Boxes) with snapshots so you can break things and roll back instantly.
+rockylinux
+
+Part 1 — The Linux Boot Sequence (Theory)
+Understanding the full chain is critical. Here's what happens when you power on a Rocky Linux 9 machine:
+scribd
++1
+
+BIOS/UEFI — firmware initializes hardware, runs POST, locates the boot device.
+
+GRUB2 (Grand Unified Bootloader) — reads /boot/grub2/grub.cfg, displays the kernel menu, lets you edit boot parameters.
+rockylinux
+
+Kernel loading — GRUB loads the compressed kernel (vmlinuz) and the initial RAM filesystem (initramfs) into memory.
+
+initramfs — a temporary root filesystem that contains essential drivers (storage, filesystem, LVM) needed to find and mount the real root / partition.
+danielvelasco
++1
+
+systemd (PID 1) — the kernel hands off to systemd, which reads the default target and starts all required services in parallel.
+
+Default target reached — system is ready (e.g., multi-user.target or graphical.target).
+
+KVM install: see [devi]~ doc kvm
+# 1
+| File                  | Purpose                                               |
+| --------------------- | ----------------------------------------------------- |
+| /boot/grub2/grub.cfg  | Generated config — never edit directly rockylinux​    |
+| /etc/default/grub     | Your tunable parameters (timeout, kernel args)        |
+| /etc/grub.d/*         | Scripts that generate grub.cfg (menu entries, themes) |
+| /boot/vmlinuz-*       | Compressed kernel images                              |
+| /boot/initramfs-*.img | Initial RAM filesystem images rockylinux​             |o
+
+# 2
+cat /etc/default/grub
+
+# 3
+# Edit the defaults file
+sudo vi /etc/default/grub
+# Change GRUB_TIMEOUT=5 to GRUB_TIMEOUT=10
+
+# Regenerate grub.cfg (BIOS systems):
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+
+# For UEFI systems:
+sudo grub2-mkconfig -o /boot/efi/EFI/rocky/grub.cfg
+
+sudo sed -i 's/rhgb quiet//g' /etc/default/grub
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+sudo reboot
+
