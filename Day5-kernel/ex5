@@ -1,0 +1,54 @@
+Part 5 — Interrupt Boot & Reset Root Password
+This is almost guaranteed on the RHCSA exam. There are two methods:
+youtube
++1
+
+Method 1: rd.break (Classic)
+Reboot the VM → press e at the GRUB menu.
+
+Find the linux line and append rd.break at the end.
+
+Remove rhgb quiet if present (so you see what's happening).
+
+Press Ctrl+X to boot.
+
+You land in an initramfs emergency shell — the real root is mounted read-only at /sysroot.
+
+# Remount /sysroot as read-write
+mount -o remount,rw /sysroot
+
+# Chroot into the real system
+chroot /sysroot
+
+# Change the root password
+passwd root
+# (Enter new password twice)
+
+# Tell SELinux to relabel everything on next boot
+touch /.autorelabel
+
+# Exit chroot and reboot
+exit
+exit
+# (system reboots and relabels — this can take a few minutes)
+
+Method 2: init=/bin/bash
+At GRUB, press e → find the linux line.
+
+Replace everything after root=... with init=/bin/bash (or append it at the end).
+
+Press Ctrl+X.
+
+# Remount root as read-write
+mount -o remount,rw /
+
+# Reset password
+passwd root
+
+# SELinux relabel
+touch /.autorelabel
+
+# Reboot safely
+sync
+exec /sbin/reboot -f
+

@@ -38,3 +38,19 @@ sudo systemctl isolate rescue.target
 # Enter emergency mode (root fs is read-only!)
 sudo systemctl isolate emergency.target
 
+4.3 — Change Target at GRUB (Boot Time)
+This is the exam-critical skill:
+
+Reboot the VM.
+
+At the GRUB menu, press e to edit the default entry.
+
+Find the line starting with linux (the kernel command line).
+
+Append systemd.unit=rescue.target at the end of the line.
+
+Press Ctrl+X to boot with that change.
+
+The system will boot directly into rescue mode. This change is temporary — it only applies to this single boot.
+
+Try the same with systemd.unit=emergency.target to see the difference (emergency gives you a read-only root filesystem and almost no services).
