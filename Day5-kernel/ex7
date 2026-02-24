@@ -1,0 +1,56 @@
+Part 7 — Kernel Modules
+Kernel modules are dynamically loadable pieces of kernel code (drivers, filesystems, etc.).
+
+7.1 — Essential Commands
+
+bash
+# List all currently loaded modules
+lsmod
+
+# Count loaded modules
+lsmod | wc -l
+
+# Get info about a specific module
+modinfo ext4
+modinfo e1000
+
+# See module parameters
+modinfo -p ext4
+
+# Search for a module
+find /lib/modules/$(uname -r) -name "*.ko*" | grep vfat
+7.2 — Load and Unload Modules
+
+bash
+# Load a module (with dependency resolution)
+sudo modprobe vfat
+
+# Verify it loaded
+lsmod | grep vfat
+
+# Unload it
+sudo modprobe -r vfat
+
+# Verify it's gone
+lsmod | grep vfat
+7.3 — Blacklist a Module Permanently
+
+bash
+# Create a blacklist file
+echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+
+# Rebuild initramfs so it takes effect at boot
+sudo dracut --force
+
+# Reboot and verify
+sudo reboot
+lsmod | grep nouveau   # Should return nothing
+7.4 — Auto-Load a Module at Boot
+
+bash
+# Create a modules-load config
+echo "vfat" | sudo tee /etc/modules-load.d/vfat.conf
+
+# Reboot and verify
+sudo reboot
+lsmod | grep vfat   # Should be loaded
