@@ -1,0 +1,44 @@
+9.1 — View Boot Logs
+￼
+bash
+# Kernel ring buffer (hardware detection, module loading)
+dmesg | less
+dmesg | grep -i error
+
+# Current boot journal
+journalctl -b
+
+# Previous boot journal (if persistent journal is configured)
+journalctl -b -1
+
+# Only kernel messages
+journalctl -k
+
+# Follow live
+journalctl -f
+9.2 — Enable Persistent Journal
+By default, journal logs may not survive reboot:
+scribd
++1
+
+￼
+bash
+# Create the persistent directory
+sudo mkdir -p /var/log/journal
+
+# Restart journald
+sudo systemctl restart systemd-journald
+
+# Verify you can see previous boots
+journalctl --list-boots
+9.3 — Analyze Boot Performance
+￼
+bash
+# Total boot time breakdown
+systemd-analyze
+
+# Blame: which services took the longest
+systemd-analyze blame
+
+# Generate a visual SVG timeline
+systemd-analyze plot > boot-timeline.svg

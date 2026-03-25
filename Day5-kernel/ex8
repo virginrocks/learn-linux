@@ -1,0 +1,35 @@
+Part 8 — Initramfs (Initial RAM Filesystem)
+The initramfs image is critical — it contains the minimum drivers and tools needed for the kernel to find and mount your root filesystem.
+rockylinux
++1
+
+8.1 — Inspect Initramfs Contents
+￼
+bash
+# List everything inside the current initramfs
+lsinitrd /boot/initramfs-$(uname -r).img | less
+
+# Search for a specific module inside initramfs
+lsinitrd /boot/initramfs-$(uname -r).img | grep ext4
+
+# Check if a modprobe config was included
+lsinitrd /boot/initramfs-$(uname -r).img | grep modprobe.d
+8.2 — Rebuild Initramfs
+￼
+bash
+# Force rebuild for the current kernel
+sudo dracut --force /boot/initramfs-$(uname -r).img $(uname -r)
+
+# Rebuild for ALL installed kernels
+sudo dracut --regenerate-all --force
+8.3 — Add a Driver to Initramfs
+If you need a driver available at early boot:
+
+￼
+bash
+# Edit dracut config
+sudo vi /etc/dracut.conf.d/mydriver.conf
+# Add: force_drivers+=" megaraid_sas "
+
+# Rebuild
+sudo dracut --force

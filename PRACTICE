@@ -57,3 +57,33 @@ All Exercises Mastered (No Solutions - Practice List)
         Create systemd Quadlet for nginx-lvm container with persistent volume
 
 Total: 24 exercises mastered. Practice in order to simulate RHCSA 2.5h exam.
+ 
+    Day 5: Boot & kernel
+
+        Change GRUB timeout to 15 seconds and verify
+
+        Remove rhgb quiet, reboot, observe verbose boot
+
+        Switch default target to multi-user.target, reboot, confirm no GUI
+
+        At GRUB, boot into rescue.target using systemd.unit=
+
+        At GRUB, boot into emergency.target — note root is read-only
+
+        Reset root password with rd.break method (do 3 times)
+
+        Reset root password with init=/bin/bash method
+
+        List kernel modules with lsmod, inspect one with modinfo
+
+        Load and unload vfat module with modprobe
+
+        Blacklist a module, rebuild initramfs, verify after reboot
+
+        Inspect initramfs contents with lsinitrd
+
+        Force-rebuild initramfs with dracut --force
+
+        Enable persistent journaling and view previous boot logs
+
+        Run systemd-analyze blame and identify the slowest services

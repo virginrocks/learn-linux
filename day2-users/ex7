@@ -12,7 +12,7 @@ Script backup
 
 systemd Service
     sudo vim /etc/systemd/system/backup-lvdata.service
-        [Unit]
+        [unit]
         Description=Daily lvdata backup
 
         [Service]
@@ -31,8 +31,6 @@ systemd Timer
 
         [Install]
         WantedBy=timers.target
-
-    sudo systemctl enable --now backup-lvdata.timer
 
 More data
     sudo setfacl -m u:bob:rwx /mnt/lvdata
@@ -57,7 +55,7 @@ Manual test
     tail /var/log/backup.log
 
 Artifact
-    sudo touch acl-quota && sudo getfacl /mnt/lvdata | sudo tee acl-quota
+    sudo touch acl-quota -- sudo getfacl /mnt/lvdata | sudo tee acl-quota
     sudo xfs_quota -x -c 'report -h' /mnt/lvdata | sudo tee -a acl-quota
     sudo systemctl list-timers > timers-list.txt
     sudo cp /etc/systemd/system/baackup-lvdata.*

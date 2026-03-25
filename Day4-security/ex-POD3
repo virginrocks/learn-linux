@@ -18,6 +18,9 @@ Quadlet Container Service (systemd deprecated)
         systemctl --user start nginx-lvm
         systemctl --user status nginx-lvm
 
+    Logs
+        podman logs nginx-lvm
+
     Test Quadlet
         curl localhost:8081
           % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
